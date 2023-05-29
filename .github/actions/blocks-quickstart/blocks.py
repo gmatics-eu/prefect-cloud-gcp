@@ -16,9 +16,11 @@ parser.add_argument("-n", "--block-name", default="default")
 parser.add_argument("-i", "--image")
 parser.add_argument("--region", default="us-east1")
 
+parser.add_argument("-t", "--access-token", default=None)
+
 args = parser.parse_args()
 
-gh = GitHub(repository=args.repo, reference=args.branch)
+gh = GitHub(repository=args.repo, reference=args.branch, access_token=args.access_token)
 gh.save(args.block_name, overwrite=True)
 
 block = CloudRunJob(

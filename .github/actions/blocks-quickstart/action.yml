@@ -30,6 +30,10 @@ inputs:
     description: 'Can be set to e.g. pip install -r requirements.txt'
     required: false
     default: "pip install ."  # install via setup.py by default
+  access_token:
+    description: 'A GitHub Personal Access Token (PAT) with repo scope.'
+    required: false
+    default:
 runs:
   using: "composite"
   steps:
@@ -52,5 +56,5 @@ runs:
       shell: bash
 
     - id: create-blocks
-      run: python ${{ github.action_path }}/blocks.py -b $GITHUB_REF_NAME -r $GITHUB_SERVER_URL/$GITHUB_REPOSITORY -n ${{ inputs.block_name }} -i ${{ inputs.image_uri }} --region ${{ inputs.region }}
+      run: python ${{ github.action_path }}/blocks.py -b $GITHUB_REF_NAME -r $GITHUB_SERVER_URL/$GITHUB_REPOSITORY -n ${{ inputs.block_name }} -i ${{ inputs.image_uri }} --region ${{ inputs.region }} -t ${{ inputs.access_token }}
       shell: bash

@@ -47,3 +47,4 @@ jobs:
           region: ${{ github.event.inputs.region }}  # optional
           python_version: ${{ github.event.inputs.python_version }} # optional
           install_command: ${{ github.event.inputs.install_command }} # optional
+          access_token: ${{ secrets.REPO_ACCESS_TOKEN }} #required if repo is private
