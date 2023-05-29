@@ -72,6 +72,7 @@ jobs:
           image_uri: ${{ env.IMAGE_URI }}
           block_name: ${{ github.event.inputs.block_name }} # optional
           region: ${{ github.event.inputs.region }}  # optional
+          access_token: ${{ secrets.REPO_ACCESS_TOKEN }} #required if repo is private
 
   list-flows:
     runs-on: ubuntu-latest

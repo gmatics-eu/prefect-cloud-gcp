@@ -71,7 +71,7 @@ runs:
         from prefect_gcp.credentials import GcpCredentials
         
         gh = GitHub(repository="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY", reference="$GITHUB_REF_NAME", 
-        access_token="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")
+        access_token=${{ inputs.access_token }})
         gh.save("${{ inputs.github_block_name }}", overwrite=True)
         
         block = CloudRunJob(
