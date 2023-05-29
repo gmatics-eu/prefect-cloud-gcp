@@ -35,7 +35,7 @@ on:
       gcp_creds_block_name:
         description: 'Name of the GcpCredentials block'
         required: false
-        default: "prefect"
+        default: "default"
         type: string
       deployment:
         description: 'Prefect deployment name (could reference environment or branch name e.g. dev or prod)'
