@@ -38,6 +38,10 @@ inputs:
     description: 'Can be set to e.g. pip install -r requirements.txt'
     required: false
     default: "pip install ."  # install via setup.py by default
+  access_token:
+    description: 'A GitHub Personal Access Token (PAT) with repo scope.'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -65,10 +69,9 @@ runs:
         from prefect.filesystems import GitHub
         from prefect_gcp.cloud_run import CloudRunJob
         from prefect_gcp.credentials import GcpCredentials
-        import os
         
         gh = GitHub(repository="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY", reference="$GITHUB_REF_NAME", 
-        access_token=os.getenv("REPO_ACCESS_TOKEN"))
+        access_token=${{ inputs.access_token }})
         gh.save("${{ inputs.github_block_name }}", overwrite=True)
         
         block = CloudRunJob(
