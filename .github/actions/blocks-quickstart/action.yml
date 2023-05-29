@@ -30,10 +30,6 @@ inputs:
     description: 'Can be set to e.g. pip install -r requirements.txt'
     required: false
     default: "pip install ."  # install via setup.py by default
-  access_token:
-    description: 'A GitHub Personal Access Token (PAT) with repo scope.'
-    required: false
-    default:
 runs:
   using: "composite"
   steps:
