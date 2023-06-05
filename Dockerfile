@@ -4,6 +4,9 @@ COPY requirements.txt .
 COPY setup.py .
 COPY prefect_utils .
 
+# Use the prefect environment by default
+RUN echo "conda activate prefect" >> ~/.bashrc
+SHELL ["/bin/bash", "--login", "-c"]
 RUN pip install --upgrade pip setuptools --no-cache-dir
 RUN pip install --trusted-host pypi.python.org --no-cache-dir .
 
