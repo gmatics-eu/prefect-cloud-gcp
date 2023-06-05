@@ -1,4 +1,4 @@
-FROM prefecthq/prefect:2-python3.10
+FROM prefecthq/prefect:2-python3.10-conda
 
 COPY requirements.txt .
 COPY setup.py .
@@ -17,4 +17,4 @@ ENV PYTHONUNBUFFERED True
 
 COPY flows/ /opt/prefect/flows/
 
-ENTRYPOINT ["prefect", "agent", "start", "-q", "default"]
+ENTRYPOINT ["/bin/bash", "--login", "-c", "prefect agent start -q default"]
