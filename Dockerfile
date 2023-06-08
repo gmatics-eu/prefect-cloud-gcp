@@ -1,8 +1,6 @@
 FROM prefecthq/prefect:2-python3.10-conda
 
 
-ENV PATH="/opt/conda/bin:${PATH}"
-
 COPY requirements.txt .
 COPY setup.py .
 COPY prefect_utils .
