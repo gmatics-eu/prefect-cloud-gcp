@@ -1,13 +1,9 @@
-FROM prefecthq/prefect:2-python3.10-conda
+FROM prefecthq/prefect:2-python3.10
 
-#WORKDIR /opt/prefect
 COPY requirements.txt .
 COPY setup.py .
 COPY prefect_utils .
 
-# Use the prefect environment by default
-RUN echo "conda activate prefect" >> ~/.bashrc
-SHELL ["/bin/bash", "--login", "-c"]
 RUN pip install --upgrade pip setuptools --no-cache-dir
 RUN pip install --trusted-host pypi.python.org --no-cache-dir .
 
@@ -20,8 +16,5 @@ ENV PREFECT_API_URL=$PREFECT_API_URL
 ENV PYTHONUNBUFFERED True
 
 COPY flows/ /opt/prefect/flows/
-COPY start_prefect.sh .
-RUN chmod +x start_prefect.sh
 
-
-ENTRYPOINT ["/bin/bash", "--login", "-c", "prefect agent start -q default"]
+ENTRYPOINT ["prefect", "agent", "start", "-q", "default"]
