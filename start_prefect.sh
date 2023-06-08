@@ -1,7 +1,4 @@
 #!/bin/bash
-
-# Activate the Conda environment
+source /opt/conda/etc/profile.d/conda.sh
 conda activate prefect
-
-# Start the Prefect engine
-python -m prefect.engine
+exec "$@"
