@@ -20,5 +20,5 @@ ENV PYTHONUNBUFFERED True
 
 COPY flows/ /opt/prefect/flows/
 COPY start_prefect.sh opt/conda/bin/start_prefect.sh
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-v", "-n", "prefect", "/bin/bash", "--login", "-c"]
-CMD ["prefect agent start -q test"]
+ENTRYPOINT ["bash", "-c", "source /opt/conda/etc/profile.d/conda.sh", "conda activate prefect && prefect agent start -q test"]
+#ENTRYPOINT ["conda", "run", "--no-capture-output", "-v", "-n", "prefect", "/bin/bash", "--login", "-c"]
