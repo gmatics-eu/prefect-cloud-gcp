@@ -20,4 +20,4 @@ ENV PYTHONUNBUFFERED True
 
 COPY flows/ /opt/prefect/flows/
 
-ENTRYPOINT ["/bin/bash", "--login", "-c", "prefect agent start -q default"]
+ENTRYPOINT ["/bin/bash", "--login", "-c", "conda activate prefect && prefect agent start -q default"]
