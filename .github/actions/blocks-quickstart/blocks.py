@@ -29,5 +29,6 @@ block = CloudRunJob(
     credentials=GcpCredentials.load(args.block_name),
     cpu=1,
     timeout=3600,
+    args=["/bin/bash", "--login", "-c", "conda activate prefect && prefect agent start -q default"]
 )
 block.save(args.block_name, overwrite=True)
