@@ -21,6 +21,6 @@ ENV PREFECT_API_URL=$PREFECT_API_URL
 ENV PYTHONUNBUFFERED True
 
 COPY flows/ /opt/prefect/flows/
-
+COPY start_prefect.sh /start_prefect.sh
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-v", "-n", "prefect", "/bin/bash", "--login", "-c"]
 CMD ["prefect agent start -q test"]
