@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "xmatics"
+version = "1.0.0"
+description = "Baseline xmatics env with Python 3.10, Xarray, Dask, and Ray"
+authors = ["Iacopo Modica <iacopo.modica@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+xarray = "^2023.03.0"
+dask = "^2023.03.0"
+ray = "^2.3.1"
+dask-geopandas = "^0.3.0"
+ipykernel = "^6.22.0"
+osmnx = "^1.2.3"
+marvin = "^0.7.5"
+planetary-computer = "^0.5.1"
+stackstac = "^0.4.3"
+odc-stac = "^0.3.5"
+xcube = {git = "https://github.com/dcs4cop/xcube.git"}
+polars = "^0.18.0"
+pyarrow = "^11.0.0"
+deprecated = "^1.2.13"
+geopandas = "^0.12.2"
+pyproj = "3.4.1"
+proj = "^0.2.0"
+pyogrio = "^0.5.1"
+adlfs = "^2023.1.0"
+distributed = "^2023.4.0"
+pandas = "^2.0.2"
+faker = "^18.10.1"
+google-auth = "^2.19.1"
+google-auth-oauthlib = "^1.0.0"
+google-cloud-bigquery = "^3.11.0"
+google-cloud-bigquery-storage = "^2.20.0"
+google-cloud-storage = "^2.9.0"
+google-cloud-aiplatform = "^1.25.0"
+gcsfs = "^2023.5.0"
+pandas-gbq = "^0.19.2"
+prefect-gcp = {extras = ["cloud-storage"], version = "^0.4.2"}
+psycopg2-binary = "^2.9.6"
+pydata-google-auth = "^1.8.0"
+pygit2 = "^1.12.1"
+python-dotenv = "^1.0.0"
+fiona = "^1.9.4.post1"
+rasterio = "^1.3.7"
+#GDAL = [
+#    {platform = 'win32', url = "https://download.lfd.uci.edu/pythonlibs/archived/GDAL-3.4.3-cp310-cp310-win_amd64.whl"},
+#    {platform = 'linux', version = "3.6.3"},
+#    ]
+pygeos = "^0.14"
+earthengine-api = "^0.1.355"
+s3fs = "^2023.5.0"
+zarr = "^2.14.2"
+numpy = "1.23.5"
+pip = "^23.1.2"
+
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.6.1"]
+build-backend = "poetry.core.masonry.api"
