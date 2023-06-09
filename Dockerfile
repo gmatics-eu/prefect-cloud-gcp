@@ -1,37 +1,18 @@
-FROM prefecthq/prefect:2-python3.10
+FROM prefecthq/prefect:2-python3.10-conda
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget \
-    ca-certificates \
-    bzip2 \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set the environment variables needed for Miniconda
-ENV PATH /opt/conda/bin:$PATH
-
-# Download and install Miniconda
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
-    rm ~/miniconda.sh && \
-    /opt/conda/bin/conda clean -tp && \
-    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
-    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
-    echo "conda activate base" >> ~/.bashrc
-
+COPY environment.yml .
 COPY requirements.txt .
+COPY setup.cfg .
 COPY setup.py .
-COPY prefect_utils .
-COPY pyproject.toml .
+COPY xmatics .
 
-# Use the prefect environment by default
-RUN conda install gdal
-RUN pip install --upgrade pip setuptools poetry --no-cache-dir
-RUN poetry install
+RUN apt-get update && apt-get install -y libarchive13
 
-
-
-ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
-ENV C_INCLUDE_PATH=/usr/include/gdal
+# RUN conda install gdal fiona rasterio && conda install tiledb -c conda-forge
+RUN conda install -c conda-forge mamba
+RUN mamba env update --prefix /opt/conda/envs/prefect -f environment.yml
+RUN pip install --upgrade pip setuptools --no-cache-dir
+RUN pip install --trusted-host pypi.python.org --no-cache-dir .
 
 ARG PREFECT_API_KEY
 ENV PREFECT_API_KEY=$PREFECT_API_KEY
@@ -41,9 +22,6 @@ ENV PREFECT_API_URL=$PREFECT_API_URL
 
 ENV PYTHONUNBUFFERED True
 
-COPY flows/ /opt/prefect/flows/
-COPY start_prefect.sh opt/conda/bin/start_prefect.sh
+COPY xmatics/flows/ /opt/prefect/flows/
 
-
-ENTRYPOINT ["prefect", "agent", "start", "-q", "default"]
-#ENTRYPOINT ["conda", "run", "--no-capture-output", "-v", "-n", "prefect", "/bin/bash", "--login", "-c"]
+ENTRYPOINT ["/bin/bash", "--login", "-c", "prefect agent start -q cloudrun"]
