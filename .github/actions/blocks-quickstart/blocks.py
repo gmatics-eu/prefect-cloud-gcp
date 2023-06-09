@@ -7,7 +7,7 @@ from prefect.filesystems import GitHub
 from prefect_gcp.cloud_run import CloudRunJob
 from prefect_gcp.credentials import GcpCredentials
 
-REPO = "https://github.com/anna-geller/prefect-cloud-gcp"
+REPO = "https://github.com/gmatics-eu/prefect-cloud-gcp"
 parser = argparse.ArgumentParser()
 parser.add_argument("-b", "--branch", default="main")
 parser.add_argument("-r", "--repo", default=REPO)
@@ -29,6 +29,11 @@ block = CloudRunJob(
     credentials=GcpCredentials.load(args.block_name),
     cpu=1,
     timeout=3600,
-    #command=["conda activate prefect && prefect agent start -q default"]
+    command=[
+        "/bin/bash",
+        "--login",
+        "-c",
+        "source /opt/conda/etc/profile.d/conda.sh && conda activate prefect && python -m prefect.engine",
+    ]
 )
 block.save(args.block_name, overwrite=True)
