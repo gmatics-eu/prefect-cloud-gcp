@@ -44,8 +44,7 @@ runs:
 
     - id: install-prefect
       run: |
-        pip install prefect
-        ${{ inputs.install_command }}
+        poetry install
       shell: bash
 
     - id: login-prefect
