@@ -1,0 +1,39 @@
+name: xmatics
+channels:
+  - conda-forge
+  - mamba
+  - defaults
+dependencies:
+  - adlfs
+  - botocore==1.29.76
+  - dask
+  - dask-geopandas
+  - deprecated
+  - distributed
+  - earthengine-api
+  - geemap
+  - geopandas
+  - ipykernel
+  - osmnx
+  - odc-stac
+  - pandas
+  - planetary-computer
+  - pre-commit
+  - proj
+  - pyarrow
+  - pyogrio
+  - pyproj=3.4.1
+  - pytest
+  - pytest-cov
+  - python=3.10
+  - s3fs
+  - shapely<2.0
+  - sphinx
+  - sphinx-autobuild
+  - sphinx-book-theme
+  - stackstac
+  - tiledb
+  - xarray
+  - xcube
+  - zarr
+  - numpy
