@@ -5,17 +5,17 @@ on:
       region:
         description: GCP region
         required: true
-        default: 'europe-west8'
+        default: 'us-east1'
         type: string
       zone:
         description: Zone in the selected GCP region
         required: true
-        default: 'europe-west8-b'
+        default: 'us-east1-b'
         type: string
       artifact_repository:
         description: Artifact Registry Repository
         required: true
-        default: 'xmatics'
+        default: 'GCP'
         type: string
       image_name:
         description: Artifact Container Name
@@ -30,12 +30,12 @@ on:
       block_name:
         description: 'GitHub and CloudRunJob block name'
         required: false
-        default: "dev-cloudrun-gimmi"
+        default: "default"
         type: string
       gcp_creds_block_name:
         description: 'Name of the GcpCredentials block'
         required: false
-        default: "dev-cloudrun-gimmi"
+        default: "default"
         type: string
       deployment:
         description: 'Prefect deployment name (could reference environment or branch name e.g. dev or prod)'
