@@ -23,6 +23,6 @@ ENV PREFECT_API_URL=$PREFECT_API_URL
 
 ENV PYTHONUNBUFFERED True
 
-COPY xmatics/flows/ /opt/prefect/flows/
+COPY flows/ /opt/prefect/flows/
 
 ENTRYPOINT ["/bin/bash", "--login", "-c", "prefect agent start -q cloudrun"]
