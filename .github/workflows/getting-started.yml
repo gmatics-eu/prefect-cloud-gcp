@@ -15,37 +15,37 @@ on:
       artifact_repository:
         description: Artifact Registry Repository
         required: true
-        default: 'gcpcloud'
+        default: 'xmatics'
         type: string
       image_name:
         description: Artifact Container Name
         required: true
-        default: 'deployments'
+        default: 'dev-cloudrun'
         type: string
       machine_type:
         description: GCP Compute Engine instance type
         required: true
-        default: 'e2-micro'
+        default: 'e2-medium'
         type: string
       block_name:
         description: 'GitHub and CloudRunJob block name'
         required: false
-        default: "gcpblock"
+        default: "dev-cloudrun-gimmi"
         type: string
       gcp_creds_block_name:
         description: 'Name of the GcpCredentials block'
         required: false
-        default: "gcpblock"
+        default: "dev-cloudrun-gimmi"
         type: string
       deployment:
         description: 'Prefect deployment name (could reference environment or branch name e.g. dev or prod)'
         required: false
-        default: gcpdeploy
+        default: development
         type: string
       queue:
         description: 'Prefect queue name'
         required: false
-        default: gcpqueue
+        default: cloudrun
         type: string
 jobs:
   deploy-container:
@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: set-matrix
-        run: echo "matrix=$(ls flows/*.py | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
+        run: echo "matrix=$(find xmatics/flows -type f -name "*.py" | jq -R -s -c 'split("\n")[:-1]')" >> $GITHUB_OUTPUT
 
   deploy:
     needs: list-flows

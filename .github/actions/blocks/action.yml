@@ -69,11 +69,11 @@ runs:
         from prefect.filesystems import GitHub
         from prefect_gcp.cloud_run import CloudRunJob
         from prefect_gcp.credentials import GcpCredentials
-        
-        gh = GitHub(repository="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY", reference="$GITHUB_REF_NAME", 
+
+        gh = GitHub(repository="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY", reference="$GITHUB_REF_NAME",
         access_token=${{ inputs.access_token }})
         gh.save("${{ inputs.github_block_name }}", overwrite=True)
-        
+
         block = CloudRunJob(
           image="${{ inputs.image_uri }}",
           region="${{ inputs.region }}",
@@ -82,7 +82,7 @@ runs:
           timeout=3600,
         )
         block.save("${{ inputs.cloudrun_block_name }}", overwrite=True)
-        
+
         EOF
         python blocks.py
       shell: bash

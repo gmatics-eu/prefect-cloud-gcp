@@ -40,25 +40,35 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - uses: actions/checkout@v2
+    # Setup miniconda build env
+    - uses: conda-incubator/setup-miniconda@v2.0.0
       with:
-        python-version: "${{ inputs.python_version }}"
-        cache: 'pip'
+        miniconda-version: py310_23.3.1-0
+        mamba-version: "*"
+        channels: conda-forge
+        activate-environment: xmatics
+        environment-file: environment.yml
 
-    - id: install-prefect
-      run: |
-        pip install prefect
-        ${{ inputs.install_command }}
+    - id: activate-xmatics
       shell: bash
+      run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate xmatics
+        poetry install
+
 
     - id: login-prefect
       run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate xmatics
         prefect config set PREFECT_API_KEY=${{ inputs.prefect_api_key }}
         prefect config set PREFECT_API_URL=${{ inputs.prefect_api_url }}
       shell: bash
 
     - run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate xmatics
         prefect deployment build ${{ inputs.flow_entrypoint }} -n ${{ inputs.deployment }} -q ${{ inputs.queue }} \
         -sb "${{ inputs.storage_block }}" -ib "${{ inputs.infrastructure_block }}" --skip-upload -a -v $GITHUB_SHA
       shell: bash

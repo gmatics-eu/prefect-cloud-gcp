@@ -13,7 +13,6 @@ setup(
     packages=find_packages(exclude=["tests"]),
     version="1.0",
     python_requires=">=3.8",
-    install_requires=requirements,
     classifiers=[
         "Natural Language :: English",
         "Intended Audience :: Developers",

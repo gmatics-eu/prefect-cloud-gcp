@@ -2,12 +2,15 @@
 python blocks.py -b $GITHUB_REF_NAME -r "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
 -n ${{ inputs.block_name }} -i ${{ inputs.image_uri }} --region ${{ inputs.region }}
 """
+from __future__ import annotations
+
 import argparse
+
 from prefect.filesystems import GitHub
 from prefect_gcp.cloud_run import CloudRunJob
 from prefect_gcp.credentials import GcpCredentials
 
-REPO = "https://github.com/gmatics-eu/prefect-cloud-gcp"
+REPO = "https://github.com/gmatics-eu/xmatics"
 parser = argparse.ArgumentParser()
 parser.add_argument("-b", "--branch", default="main")
 parser.add_argument("-r", "--repo", default=REPO)
@@ -34,6 +37,6 @@ block = CloudRunJob(
         "--login",
         "-c",
         "source /opt/conda/etc/profile.d/conda.sh && conda activate prefect && python -m prefect.engine",
-    ]
+    ],
 )
-block.save(args.block_name, overwrite=True)
+block.save("default", overwrite=True)

@@ -70,6 +70,7 @@ runs:
         gcloud compute instances create-with-container "${{ inputs.machine_name }}" \
           --zone "${{ inputs.zone }}" \
           --machine-type "${{ inputs.machine_type }}" \
+          --boot-disk-size=80GB \
           --service-account $EMAIL \
           --scopes "cloud-platform" \
           --container-image "${{ env.IMAGE_URI }}"
