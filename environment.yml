@@ -37,3 +37,4 @@ dependencies:
   - xcube
   - zarr
   - numpy
+  - poetry
