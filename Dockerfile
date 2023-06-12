@@ -4,6 +4,7 @@ COPY environment.yml .
 COPY pyproject.toml .
 COPY poetry.lock .
 COPY prefect_utils .
+COPY requirements.txt .
 
 RUN apt-get update && apt-get install -y libarchive13
 

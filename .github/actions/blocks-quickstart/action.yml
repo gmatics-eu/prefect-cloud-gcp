@@ -45,6 +45,7 @@ runs:
     - id: install-prefect
       run: |
         pip install prefect
+        pip install requirements.txt
       shell: bash
 
     - id: login-prefect
